@@ -1,0 +1,17 @@
+*.bak
+*.bz2
+*.gz
+*.log
+*.pyc
+*.pyo
+*.rpm
+*.swp
+*.tar
+*.tgz
+.*~
+.DS_Store
+.rake_tasks
+.rake_test_cache
+build
+dist
+agamotto.egg-info/

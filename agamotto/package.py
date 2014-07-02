@@ -13,18 +13,18 @@
 # limitations under the License.
 
 
-from agamotto.utils import execute
+from agamotto.utils import execute, grepc
 
 
-def installed(packageName):
+def installed(package):
   """Confirm that a package is installed"""
   # TODO: Make this work with apt/dpkg
   try:
-    return (int(execute("yum list installed %s | grep -c %s" % (packageName, packageName))) > 0)
-  except Exception, e:
+    return grepc(execute("yum list installed %s" % package), package) >0
+  except Exception, _e:
     return False
 
 
-def is_installed(packageName):
+def is_installed(package):
   """Convenience alias to make the tests look nicer"""
-  return installed(packageName)
+  return installed(package)

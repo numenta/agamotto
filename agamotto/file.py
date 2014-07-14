@@ -44,6 +44,11 @@ def isDirectory(path):
   return os.path.isdir(path)
 
 
+def isExecutable(path):
+  """Test if file at path is executable"""
+  return os.access(path, os.X_OK)
+
+
 def isFile(path):
   """Test if path is a file"""
   return os.path.isfile(path)

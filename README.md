@@ -8,6 +8,13 @@ Why not use serverspec? I work in a Python shop and want our devs to be able
 to easily write their own tests. Making the test suite use the same language
 they use daily removes a potential friction point.
 
+Installation
+============
+```bash
+python setup.py install
+```
+TODO: Make this pip installable
+
 Usage
 =====
 ```python

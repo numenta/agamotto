@@ -32,4 +32,4 @@ import agamotto.service
 import agamotto.user
 import agamotto.utils
 
-__version__ = '0.1.0'
+__version__ = '0.4.3'

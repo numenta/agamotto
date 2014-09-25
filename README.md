@@ -19,44 +19,24 @@ Usage
 =====
 ```python
 
-import agamotto as a
+import agamotto
 import unittest2 as unittest
 
 
-class TestMysql(unittest.TestCase):
-
-  def test_mysql_user(self):
-    self.assertTrue(a.user.exists('mysql'))
+class TestKnownSecurityIssues(unittest.TestCase):
 
 
-  def test_mysql_server_installed(self):
-    self.assertTrue(a.package.is_installed('mysql-server'))
+  def testBashHasCVE_2014_6271Fix(self):
+    """Confirm that fix has been installed for CVE-2014-6271 Bash Code
+    Injection Vulnerability via Specially Crafted Environment Variables
+    """
+    self.assertTrue(agamotto.process.stdoutContains("(env x='() { :;}; echo vulnerable'  bash -c \"echo this is a test\") 2>&1",
+                    'ignoring function definition attempt'), 'Installed bash version is vulnerable to CVE-2014-6271')
 
-
-  def test_mysql_client_installed(self):
-    self.assertTrue(a.package.is_installed('mysql'))
-
-
-  def test_mysql_config_exists(self):
-    self.assertTrue(a.file.exists('/etc/my.cnf'))
-
-
-  def test_mysql_bound_to_localhost(self):
-    self.assertTrue(a.file.contains('/etc/my.cnf',
-                    'bind-address            = 127.0.0.1'))
-
-
-  def test_mysql_running(self):
-    self.assertTrue(a.process.is_running('/bin/sh /usr/bin/mysqld_safe'))
-
-
-  def test_mysql_initscript(self):
-    self.assertTrue(a.file.exists('/etc/init.d/mysqld'))
 
 
 if __name__ == '__main__':
   unittest.main()
-
 ```
 
 Then run py.test.

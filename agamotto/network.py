@@ -36,7 +36,7 @@ def probePort(matchtext, host='127.0.0.1', port=80, command=None):
   """
   Connect to port on host, send an optional command, then return the response.
 
-  Usage
+  Usage:
     self.assertTrue(agamotto.network.probePort(host='localhost',
                     matchtext='<title>', port=80,
                     command="GET / HTTP/1.1\nHost: localhost\n\n"),

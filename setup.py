@@ -40,7 +40,7 @@ setup(
   name='agamotto',
   version=sdict['version'],
   description='Agamotto is a module that provides helper functions for testing the configuration of a running server',
-  long_description=read('README.md'),
+  long_description=read('README.rst'),
   author='Joe Block',
   author_email='jpb@numenta.com',
   keywords=['server testing'],

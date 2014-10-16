@@ -11,9 +11,8 @@ they use daily removes a potential friction point.
 Installation
 ============
 ```bash
-python setup.py install
+pip install agamotto
 ```
-TODO: Make this pip installable
 
 Usage
 =====

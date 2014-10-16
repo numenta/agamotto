@@ -23,53 +23,40 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-try:
-  from setuptools import setup, Command
-except ImportError:
-  from distutils.core import setup, Command
+import os
 
-class PyTest(Command):
-  user_options = []
-  def initialize_options(self):
-    pass
-  def finalize_options(self):
-    pass
-  def run(self):
-    import subprocess
-    errno = subprocess.call(['py.test'])
-    raise SystemExit(errno)
+from setuptools import find_packages, setup, Command
+
+def read(*paths):
+  """Build a file path from *paths* and return the contents."""
+  with open(os.path.join(*paths), 'r') as f:
+    return f.read()
 
 sdict = {}
 
 execfile('agamotto/version.py', {}, sdict)
 
-sdict.update({
-  'name' : 'agamotto',
-  'description' :
-    'Agamotto is a module that provides helper functions for testing the configuration of a running server',
-  'url': 'http://github.com/groksolutions/agamotto',
-  'download_url' :
-    'https://github.com/GrokSolutions/agamotto/archive/%s.tar.gz' % (
-      sdict['version'],),
-  'author' : 'Joe Block',
-  'author_email' : 'jpb@groksolutions.com',
-  'keywords' : ['server testing'],
-  'license' : 'Apache',
-  'install_requires': [
-    'requests',
-    'unittest2'],
-  'test_suite': 'tests.unit',
-  'packages' : ['agamotto'],
-  'classifiers' : [
-    'Development Status :: 1 - Planning',
-    'Environment :: Console',
+setup(
+  name='agamotto',
+  version=sdict['version'],
+  description='Agamotto is a module that provides helper functions for testing the configuration of a running server',
+  long_description=read('README.rst'),
+  author='Joe Block',
+  author_email='jpb@numenta.com',
+  keywords=['server testing'],
+  license='Apache',
+  url='http://github.com/groksolutions/agamotto',
+  download_url='https://github.com/GrokSolutions/agamotto/archive/%s.tar.gz' % (sdict['version'], ),
+  install_requires=['requests', 'unittest2'],
+  test_suite='tests.unit',
+  packages=find_packages(exclude=['tests*']),
+  include_package_data=True,
+  classifiers=[
+    'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: Apache Software License',
     'Natural Language :: English',
     'Operating System :: OS Independent',
-    'Programming Language :: Python'],
-  'zip_safe' : False,
-  'cmdclass' : {'test': PyTest},
-})
-
-setup(**sdict)
+    'Programming Language :: Python'
+  ],
+)

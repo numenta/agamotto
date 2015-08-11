@@ -4,9 +4,10 @@ Agamotto
 Agamotto is a helper module to make it easier to test a running system with
 Python.
 
-Why not use serverspec? I work in a Python shop and want our devs to be able
-to easily write their own tests. Making the test suite use the same language
-they use daily removes a potential friction point.
+Why not use serverspec? I work in a Python shop and want to make it as easy
+as possible for our devs to be able to easily write their own tests. Making
+the test suite use the same language they use daily removes a potential
+friction point.
 
 Installation
 ============

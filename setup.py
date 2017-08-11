@@ -27,6 +27,32 @@ import os
 
 from setuptools import find_packages, setup, Command
 
+
+class CleanCommand(Command):
+  """
+  Add a clean option to setup.py's commands
+  """
+  description = "Clean up"
+  user_options = []
+
+
+  def initialize_options(self):
+    self.cwd = None
+
+
+  def finalize_options(self):
+    self.cwd = os.getcwd()
+
+
+  def run(self):
+    assert os.getcwd() == self.cwd, "Must be in package root: %s" % self.cwd
+    if os.path.isdir("build"):
+      shutil.rmtree("build")
+    if os.path.isdir("dist"):
+      shutil.rmtree("dist")
+
+
+
 def read(*paths):
   """Build a file path from *paths* and return the contents."""
   with open(os.path.join(*paths), 'r') as f:
@@ -42,11 +68,14 @@ setup(
   description='Agamotto is a module that provides helper functions for testing the configuration of a running server',
   long_description=read('README.rst'),
   author='Joe Block',
-  author_email='jpb@numenta.com',
+  author_email='jpb@unixorn.net',
+  cmdclass={
+    "clean": CleanCommand,
+  },
   keywords=['server testing'],
   license='Apache',
-  url='http://github.com/groksolutions/agamotto',
-  download_url='https://github.com/GrokSolutions/agamotto/archive/%s.tar.gz' % (sdict['version'], ),
+  url='http://github.com/unixorn/agamotto',
+  download_url='https://github.com/unixorn/agamotto/archive/%s.tar.gz' % (sdict['version'], ),
   install_requires=['requests', 'unittest2'],
   test_suite='tests.unit',
   packages=find_packages(exclude=['tests*']),
